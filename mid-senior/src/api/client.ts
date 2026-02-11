@@ -14,30 +14,49 @@ const apiClient: AxiosInstance = axios.create({
   headers: { "Content-Type": "application-json" },
 });
 
+// apiClient.interceptors.request.use(
+//   (config: InternalAxiosRequestConfig) => {
+//     const token = localStorage.getItem("token");
+
+//     if (token && config.headers) {
+//       config.headers.Authorization = `Bearer ${token}`;
+//     }
+//     return config;
+//   },
+//   (error: AxiosError) => {
+//     return Promise.reject(error);
+//   },
+// );
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem("token");
-
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    console.log(` ${config.method?.toUpperCase()} ${config.url}`);
     return config;
   },
-  (error: AxiosError) => {
-    return Promise.reject(error);
-  },
+  (error: AxiosError) => Promise.reject(error),
 );
 
+// apiClient.interceptors.response.use(
+//   (response) => {
+//     // return response.data?.data ?? response.data;
+//     return response.data;
+//   },
+//   (error: AxiosError) => {
+//     if (error.response?.status === 401) {
+//       localStorage.removeItem("token");
+//       window.location.href = "/login";
+//     }
+//     return Promise.reject(error);
+//   },
+// );
+
 apiClient.interceptors.response.use(
-  (response) => {
-    return response.data;
-  },
+  (response) => response.data,
   (error: AxiosError) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem("token");
-      window.location.href = "/login";
+      console.error("eroorror");
     }
     return Promise.reject(error);
   },
 );
+
 export default apiClient;
