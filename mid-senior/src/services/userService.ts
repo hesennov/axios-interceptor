@@ -37,6 +37,6 @@ export const UserService = {
   },
 
   delete: (id: number): Promise<{ message: string; deleteId: number }> => {
-    return apiClient.delete(`/users${id}`);
+    return apiClient.delete(`/users/${id}`);
   },
 };
