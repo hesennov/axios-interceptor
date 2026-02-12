@@ -33,8 +33,8 @@ export interface UpdateUserData {
 //   key: keyof T;
 //   render?: (value: T[keyof T], row: T) => React.ReactNode;
 // }
-export interface Column<T, K extends keyof T = keyof T> {
-  label: string;
-  key: K;
-  render?: (value: T[K], row: T) => React.ReactNode;
-}
+// export interface Column<T, K extends keyof T = keyof T> {
+//   label: string;
+//   key: K;
+//   render?: (value: T[K], row: T) => React.ReactNode;
+// }
